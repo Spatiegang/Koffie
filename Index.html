@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meldingen Website</title>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging.js"></script>
+</head>
+<body>
+    <h1>Meldingen verzenden</h1>
+    <button id="notifyButton">Stuur melding</button>
+
+    <script>
+        // Firebase-configuratie
+        const firebaseConfig = {
+            apiKey: "AIzaSyBKkALsna4KT-IK3aUlcg-AZkUxtAqguvk",
+            authDomain: "koffievoorpapa.firebaseapp.com",
+            projectId: "koffievoorpapa",
+            storageBucket: "koffievoorpapa.appspot.com",
+            messagingSenderId: "899570008120",
+            appId: "1:899570008120:web:b743b42053c0ba9a46e6cd",
+        };
+
+        // Initialiseer Firebase
+        firebase.initializeApp(firebaseConfig);
+        const messaging = firebase.messaging();
+
+        // Vraag om toestemming voor meldingen
+        messaging.requestPermission()
+            .then(() => {
+                console.log('Toestemming verleend voor meldingen.');
+                return messaging.getToken();
+            })
+            .then(token => {
+                console.log('Token ontvangen:', token);
+            })
+            .catch(err => {
+                console.error('Toestemming voor meldingen geweigerd:', err);
+            });
+
+        // Knop om een melding te verzenden
+        document.getElementById('notifyButton').addEventListener('click', () => {
+            // Hier kun je de logica toevoegen om een melding te verzenden
+            alert('Melding verzonden!');
+        });
+    </script>
+</body>
+</html>
